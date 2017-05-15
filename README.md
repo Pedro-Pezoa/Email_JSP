@@ -1,2 +1,2 @@
 # Email_JSP
-Projeto parrudo para a disciplina de TDI
+Projeto feito em Java parrudo para a disciplina de TDI
