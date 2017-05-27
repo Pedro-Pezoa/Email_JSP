@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  post 'email/show'
+  post 'email/new'
+  post 'email/edit'
+  post 'email/destroy'
+
   post 'user/show'
-
   post 'user/new'
-
   post 'user/edit'
-
   post 'user/destroy'
 
   get 'welcome/index'
