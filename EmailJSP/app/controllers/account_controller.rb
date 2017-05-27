@@ -4,8 +4,13 @@ class AccountController < ApplicationController
   
   def new
     if request.method == "POST"
-      # Faz umas coisinhas e redireciona
-      redirect_back fallback_location: "/"
+      @user = User.create(user_params)
+      session[:user] = @user  # will later used by the application
+      redirect_to root_path   # should redirect to /emails
     end
+  end
+
+  def user_params
+    params[:user].permit(:nome, :senha)
   end
 end
