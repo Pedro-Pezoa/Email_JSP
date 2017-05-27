@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'account/new'
+  post 'account/new'
+
   post 'api/email/show'
   post 'api/email/new'
   post 'api/email/edit'
