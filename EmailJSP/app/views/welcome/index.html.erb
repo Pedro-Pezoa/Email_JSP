@@ -9,7 +9,23 @@
 	<body>
 		<div id="app">
 			<center>
+				<br/><br/>
 				<h1>Bem vindo aos Emails Malignos</h1>
+				<br/><br/>
+
+				<br/><br/>
+				<a href="/account/new">Criar nova conta</a>
+				<br/><br/>
+
+				<form action="/account/login" method="POST">
+					<fieldset>
+						<legend>Logar</legend>
+						<input class="text" placeholder="Seu nome" name="user[nome]" type="text"/>
+						<br/><br/>
+						<input class="text" placeholder="Senha" name="user[senha]" type="password"/>
+						<br/><br/>
+						<input name="" type="submit" value="Logar"/></fieldset>
+				</form>
 			</center>
 		</div>
 	</body>
