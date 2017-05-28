@@ -5,25 +5,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Emails Malignos</title>
-	</head>
+		<%= stylesheet_link_tag "application", media: "all" %>
 	<body>
 		<div id="app">
 			<center>
-				<br/><br/>
-				<h1>Bem vindo aos Emails Malignos</h1>
+				<h1>E-mailigno</h1>
+				<p>
+					<em>Tornando emails emocionantes de novo!</em>
+				</p>
 				<br/><br/>
 
-				<br/><br/>
 				<a href="/account/new">Criar nova conta</a>
-				<br/><br/>
+				<br/>
 
 				<form action="/account/login" method="POST">
 					<fieldset>
 						<legend>Logar</legend>
-						<input class="text" placeholder="Seu nome" name="user[nome]" type="text"/>
-						<br/><br/>
-						<input class="text" placeholder="Senha" name="user[senha]" type="password"/>
-						<br/><br/>
+						<input class="text" placeholder="Seu nome" name="user[nome]" type="text"/><br/>
+						<input class="text" placeholder="Senha" name="user[senha]" type="password"/><br/>
 						<input name="" type="submit" value="Logar"/></fieldset>
 				</form>
 			</center>
