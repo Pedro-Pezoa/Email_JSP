@@ -5,16 +5,16 @@ class AccountController < ApplicationController
   def new
     if request.method == "POST"
       @user = User.create(user_params)
-      session[:user] = @user  # will later used by the application
-      redirect_to root_path   # should redirect to /emails
+      session[:user_id] = @user.id  # will later used by the application
+      redirect_to root_path         # should redirect to /emails
     end
   end
 
   def login 
     @user = User.find_by(user_params)
     if @user 
-      session[:user] = @user  # will later used by the application
-      redirect_to root_path   # should redirect to /emails
+      session[:user_id] = @user.id
+      redirect_to root_path
     else
       redirect_to root_path
     end

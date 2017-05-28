@@ -4,15 +4,20 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Emails Malignos</title>
+		<title>Emails!</title>
 		<%= stylesheet_link_tag "application", media: "all" %>
-	<body>
-		<div id="app">
-			<center>
-				<h1>E-mailigno</h1>
-				<p>
-					<em>Tornando emails emocionantes de novo!</em>
-				</p>
+		<body>
+			<div id="app">
+				<center>
+					<h1>Emails!</h1>
+					<p>
+						<em>Tornando emails emocionantes de novo!</em>
+					</p>
+
+					<% if session[:user_id] != nil%>
+					<p>Olá <%= User.find_by(id: session[:user_id]).nome %> !</p>
+					<% end %>
+				
 				<br/><br/>
 
 				<a href="/account/new">Criar nova conta</a>
