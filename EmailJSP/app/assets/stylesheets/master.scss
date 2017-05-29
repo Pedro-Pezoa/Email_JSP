@@ -1,0 +1,24 @@
+$deault-font: sans-serif;
+
+body{
+		font-family: $deault-font;
+}
+
+form{
+		$margin: 20px;
+		$width: 400px;
+		
+		width: $width;
+		text-align: left;
+		margin-top: $margin;
+
+		input{
+				margin-bottom: $margin;
+				width: $width*0.8;
+		}
+
+		input[type=button],[type=submit]{
+				max-width: 150px;
+				width: $width/5;
+		}
+}
