@@ -1,5 +1,13 @@
 class EmailsController < ApplicationController
-  def index 
+
+  skip_before_action :verify_authenticity_token 
+
+  def index
+    if session[:user_id]
+      @user_name = User.find_by(id: session[:user_id]).nome
+    else
+      redirect_to "/"
+    end
   end
 
   def inbox
@@ -13,6 +21,8 @@ class EmailsController < ApplicationController
   end
 
   def exit
+    session.delete(:user_id)
+    redirect_to "/"
   end
 
   def email_id
