@@ -1,9 +1,9 @@
 class EmailsController < ApplicationController
-  def index
-    @email_id = email_id 
+  def index 
   end
 
   def inbox
+    @email_id = email_id
   end
 
   def profile
