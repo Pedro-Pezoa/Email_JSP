@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'emails/index'
+  get 'emails/index/:id', to: 'emails#index'
   get 'emails/inbox'
   get 'emails/profile'
-  post 'emails/profile'
+  post 'emails/profile', to: 'emails#profile_commit' 
   post 'emails/exit'
 
   get 'account/new'
