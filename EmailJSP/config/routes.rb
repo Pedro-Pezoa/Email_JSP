@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'emails/index'
+  get 'emails/inbox'
+  get 'emails/profile'
+  post 'emails/profile'
+  post 'emails/exit'
+
   get 'account/new'
   post 'account/new'
   post 'account/login'
