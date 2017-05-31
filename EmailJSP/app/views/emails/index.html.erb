@@ -26,11 +26,13 @@
 		<div id='dPrincipal' class='col-sm-6 noMeio'> 
             <div id='dCabecalho' class='col-sm-12'>
                 <div id='dValorID' class='col-sm-2'>
-                    <form method="post">
+                    <form action="/emails/new" method="post">
                     	<label>ID</label><br>
                         <input type='submit' value='Add' class='btn btn-default form-control numaLinha se'>
-                        <input type='text' id='FtxtNome' name='FtxtNome' class='botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
-                        <input type='text' id='FtxtSenha' name='FtxtSenha' class='form-control botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
+                        <input type='text' id='FtxtNome' name='email[email]' class='botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
+                        <input type='text' id='FtxtSenha' name='email[senha]' class='form-control botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
+                        <input type='text' id='FtxtSenha' name='email[user_id]' class='form-control botaoDepois numalinha' required style="visibility:hidden; position: absolute;" 
+                        value="<%= session[:user_id] %>" />
                     </form>
                 </div>
                 <div id='dValorNome' class='col-sm-7 form-group'>
@@ -43,11 +45,12 @@
                 <div id='dValorSenha' class='col-sm-3 form-group'>
 	                <form>
 	                	<label for='txtSenha'>Senha:</label><br>
-	                    <input type='text' id='txtSenha' name='txtSenha' onchange='mudarSenha()' class='form-control botaoDepoisSenha numalinha' />
+	                    <input type='password' id='txtSenha' name='txtSenha' onchange='mudarSenha()' class='form-control botaoDepoisSenha numalinha' />
 	                </form>
                 </div>
             </div>
 		
+			<%  %>
 
 			<% @emails.each do |email| %>
 				<div id='dInformacoes'>
@@ -59,16 +62,15 @@
 		                    	</button>&ensp; <%= email.id %>
 		                    </form>
 		                </div>
-		                <div id='dInfNome<%= email.id %>' class='col-sm-7 form-group darkGray' ondblclick='apareceInputX(<%= email.id %>)'> 
-		                	<%= email.email %> 
-		                </div>
+		                <div id='dInfNome<%= email.id %>' class='col-sm-7 form-group darkGray' ondblclick='apareceInputX(
+<%= email.id %>)'><%= email.email %></div>
 		            </div>
 		    	</div>
 			<% end %>
 
-<form action="/emails/exit" method="POST">
+			<form action="/emails/exit" method="POST">
 					<input class="btn btn-default" type="submit" value="Sair"/>
-				</form>
+			</form>
 
 		</center>
 		</div>

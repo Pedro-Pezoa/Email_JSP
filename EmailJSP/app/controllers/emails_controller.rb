@@ -31,8 +31,17 @@ class EmailsController < ApplicationController
     redirect_to "/"
   end
 
+  def new
+    Email.create(email_params)
+    redirect_to "/emails/"
+  end
+
   def email_id
     params[:id]
   end
   
+  def email_params
+    params[:email].permit(:email, :senha, :user_id)
+  end
+
 end

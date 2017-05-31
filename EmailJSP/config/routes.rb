@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'emails/profile'
   post 'emails/profile', to: 'emails#profile_commit' 
   post 'emails/exit'
+  post 'emails/new'
 
   get 'account/new'
   post 'account/new', to: 'account#new_commit'
