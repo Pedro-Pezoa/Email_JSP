@@ -30,6 +30,7 @@ class EmailsController < ApplicationController
 
   def inbox
     @email_id = email_id
+    @email = Email.find_by(id: @email_id)
   end
 
   def profile
@@ -64,7 +65,7 @@ class EmailsController < ApplicationController
   end
 
   def email_id
-    params[:id]
+    email_param(:id)
   end
 
   def email_param(key)

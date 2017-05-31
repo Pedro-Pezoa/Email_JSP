@@ -56,11 +56,17 @@
 				<div id='dInformacoes'>
 		            <div id='dInf<%= email.id %>'>
 		                <div id='dInfID<%= email.id %>' class='col-sm-5 form-group darkGray tCentered'>
-		                    <form action="/emails/destroy/" method='POST'>
+		                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
 		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
 		                    		<span class='glyphicon glyphicon-trash'></span>
-		                    	</button>&ensp; <%= email.id %>
+		                    	</button>
 		                    </form>
+		                    <form class="col-sm-3" action="/emails/inbox/" method='GET'>
+		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
+		                    		<span class='glyphicon glyphicon-check'></span>
+		                    	</button>
+		                    </form>
+
 		                </div>
 		                <div id='dInfNome<%= email.id %>' class='col-sm-7 form-group darkGray' ondblclick='apareceInputX(
 <%= email.id %>)'><%= email.email %></div>
