@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'emails/exit'
   post 'emails/new'
   post 'emails/show'
+  post 'emails/destroy'
 
   get 'account/new'
   post 'account/new', to: 'account#new_commit'

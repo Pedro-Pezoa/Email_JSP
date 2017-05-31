@@ -54,9 +54,14 @@ class EmailsController < ApplicationController
       emails = []
     end
     session[:emails] =
-    redirect_to "/emails/"    
+    redirect_to "/emails/"
   end
 
+  def destroy
+    @email = Email.find_by(id: email_param(:id))   
+    @email.destroy
+    redirect_to "/emails/"
+  end
 
   def email_id
     params[:id]
