@@ -6,61 +6,71 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href='estilos.css' type='text/css' rel='stylesheet'>
-        <script src='funcoes.js' language='javascript'></script>
+
+        <%= javascript_include_tag "funcoes" %>
 		
         <script src='/assets/vendors/jquery.min.js' language='javascript'></script>
         <script src='/assets/vendors/bootstrap.min.js' language='javascript'></script>
 
 		<%= stylesheet_link_tag "application", media: "all" %>
+		<%= stylesheet_link_tag "estilos", media: "all" %>
 	</head>
 	<body>
-		<center>
+	<center>
 
 			<%= render "shared/menu" %>
 			
 			<h3>
 				Você é <%= @user_name %>
 			</h3>
-
-			<div id='dPrincipal' class='col-sm-6 noMeio'> <!-- #a8353a -->
-				<div id='dCabecalho' class='col-sm-12'>
-					<div id='dValorID' class='col-sm-1'>
-						<label>ID</label>
-						<form method="post">
-							<input type='submit' value='Add' class='btn btn-default form-control numaLinha se'>
-							<input type='text' id='FtxtNome' name='FtxtNome' class='botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
-							<input type='text' id='FtxtProf' name='FtxtProf' class='form-control botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
-						</form>
-					</div>
-					<div id='dValorNome' class='col-sm-6 form-group'>
-						<form method="post">
-							<label for='txtNome'>Nome:</label><br>
-							<input type='text' id='txtNome' name='txtNome' onchange='mudarNome()' class='form-control botaoDepois numalinha' />
-							<button type='submit' class='btn btn-default form-control botaoAntes numalinha'><span class=' glyphicon glyphicon-search'></span></button>
-						</form>
-					</div>
-				</div>
-			</div>
+		<div id='dPrincipal' class='col-sm-6 noMeio'> 
+            <div id='dCabecalho' class='col-sm-12'>
+                <div id='dValorID' class='col-sm-2'>
+                    <form method="post">
+                    	<label>ID</label><br>
+                        <input type='submit' value='Add' class='btn btn-default form-control numaLinha se'>
+                        <input type='text' id='FtxtNome' name='FtxtNome' class='botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
+                        <input type='text' id='FtxtSenha' name='FtxtSenha' class='form-control botaoDepois numalinha' required style="visibility:hidden; position: absolute;" />
+                    </form>
+                </div>
+                <div id='dValorNome' class='col-sm-7 form-group'>
+                    <form method="post">
+                        <label for='txtNome'>Nome:</label><br>
+                        <input type='text' id='txtNome' name='txtNome' onchange='mudarNome()' class='form-control botaoDepoisNome numalinha' />
+                        <button type='submit' class='btn btn-default form-control botaoAntes numalinha'><span class=' glyphicon glyphicon-search'></span></button>
+                    </form>
+                </div>
+                <div id='dValorSenha' class='col-sm-3 form-group'>
+	                <form>
+	                	<label for='txtSenha'>Senha:</label><br>
+	                    <input type='text' id='txtSenha' name='txtSenha' onchange='mudarSenha()' class='form-control botaoDepoisSenha numalinha' />
+	                </form>
+                </div>
+            </div>
+		
 
 			<% @emails.each do |email| %>
-			<div id='dInformacoes'>
-				<div id='dInf<%= email.id %>'>
-					<div id='dInfID<%= email.id %>' class='col-sm-2 form-group darkGray tCentered'>
-						<form action="" method='POST'><button type='submit' id='dInfIDbtn2' name='del' value='<%= email.id %>'>
-								<span class='glyphicon glyphicon-trash'>
-							</span></button>&ensp; <%= email.id %></form>
-					</div>
-					<div id='dInfNome<%= email.id %>' class='col-sm-7 form-group darkGray' ondblclick='apareceInputX(<%= email.id %>)'> <%= email.email %> </div>
-				</div>
-			</div>
+				<div id='dInformacoes'>
+		            <div id='dInf<%= email.id %>'>
+		                <div id='dInfID<%= email.id %>' class='col-sm-5 form-group darkGray tCentered'>
+		                    <form action="" method='POST'>
+		                    	<button type='submit' id='dInfIDbtn2' name='del' class='btn btn-default' value='<%= email.id %>'>
+		                    		<span class='glyphicon glyphicon-trash'></span>
+		                    	</button>&ensp; <%= email.id %>
+		                    </form>
+		                </div>
+		                <div id='dInfNome<%= email.id %>' class='col-sm-7 form-group darkGray' ondblclick='apareceInputX(<%= email.id %>)'> 
+		                	<%= email.email %> 
+		                </div>
+		            </div>
+		    	</div>
 			<% end %>
 
-			<div id="app">
-				<form action="/emails/exit" method="POST">
+<form action="/emails/exit" method="POST">
 					<input class="btn btn-default" type="submit" value="Sair"/>
 				</form>
-			</div>
+
 		</center>
+		</div>
 	</body>
 </html>

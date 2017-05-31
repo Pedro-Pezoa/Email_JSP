@@ -1,0 +1,72 @@
+.tCentered {
+    text-align: center;
+}
+
+.darkGray {
+    text-align: left;
+    border-top: 1px #D0D0D0 solid;
+    border-bottom: 1px #D0D0D0 solid;
+    background-color:#F0F0F0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-height: 42px;
+}
+
+.lightGray {
+    border-top: 1px #D8D8D8 solid;
+    border-bottom: 1px #D8D8D8 solid;
+    background-color:#F8F8F8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.numaLinha {
+    position: relative;
+    right: 7.5%;
+}
+
+.botaoDepoisNome {
+    border-radius: 10px 0px 0px 10px;
+    width: 70%;
+}
+
+.botaoDepoisSenha {
+    border-radius: 10px 10px 10px 10px;
+    width: 45%;
+}
+
+.botaoAntes {
+    border-radius: 0px 10px 10px 0px;
+    width: 20%;
+}
+
+.numalinha {
+    display: inline-block;
+}
+
+.estaEditando {
+
+}
+
+.se {
+    width: 250%;
+}
+
+.noMeio {
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+#dInformacoes form{
+    margin: -5px;
+}
+
+#dInfIDbtn2 {
+    height: 30px;
+    width: 42px;
+}
+
+form{
+    float: left;
+}
