@@ -36,9 +36,9 @@
                     </form>
                 </div>
                 <div id='dValorNome' class='col-sm-7 form-group'>
-                    <form method="post">
+                    <form action="\emails\" method="GET">
                         <label for='txtNome'>Nome:</label><br>
-                        <input type='text' id='txtNome' name='txtNome' onchange='mudarNome()' class='form-control botaoDepoisNome numalinha' />
+                        <input type='text' id='txtNome' name='email[email]' onchange='mudarNome()' class='form-control botaoDepoisNome numalinha' />
                         <button type='submit' class='btn btn-default form-control botaoAntes numalinha'><span class=' glyphicon glyphicon-search'></span></button>
                     </form>
                 </div>

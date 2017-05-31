@@ -5,11 +5,23 @@ class EmailsController < ApplicationController
   def index
     if session[:user_id]
       @user_name = User.find_by(id: session[:user_id]).nome
-      @emails = Email.where(user_id: session[:user_id])
+      if params[:email]
+        if params[:email][:email]
+          unless params[:email][:email].empty?
+             @emails = Email.where(email: email_param(:email))
+           else
+            @emails = Email.where(user_id: session[:user_id])
+           end
+         end
+       
 
-    unless @emails
-      @emails = []
-    end
+      else
+        @emails = Email.where(user_id: session[:user_id])
+
+        unless @emails
+          @emails = []
+        end
+      end
 
     else
       redirect_to "/"
@@ -36,8 +48,22 @@ class EmailsController < ApplicationController
     redirect_to "/emails/"
   end
 
+  def show
+    emails = Email.where(email: email_param(:email))
+    unless @emails
+      emails = []
+    end
+    session[:emails] =
+    redirect_to "/emails/"    
+  end
+
+
   def email_id
     params[:id]
+  end
+
+  def email_param(key)
+    params[:email][key]
   end
   
   def email_params
