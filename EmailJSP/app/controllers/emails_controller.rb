@@ -5,6 +5,12 @@ class EmailsController < ApplicationController
   def index
     if session[:user_id]
       @user_name = User.find_by(id: session[:user_id]).nome
+      @emails = Email.where(user_id: session[:user_id])
+
+    unless @emails
+      @emails = []
+    end
+
     else
       redirect_to "/"
     end

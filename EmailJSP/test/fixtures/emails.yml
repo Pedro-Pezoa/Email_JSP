@@ -2,10 +2,10 @@
 
 one:
   user: one
-  email: MyString
-  senha: MyString
+  email: pedroluizpezoa@gmail.com
+  senha: 123
 
 two:
-  user: two
-  email: MyString
-  senha: MyString
+  user: one
+  email: 456pedroluizpezoa@hotmail.com
+  senha: 456
