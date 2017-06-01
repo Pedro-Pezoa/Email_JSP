@@ -10,8 +10,18 @@
 	<body>
 		<h1>
 			<%= @email_id %>
-			<br>
-			<%= @email.email %>
+			<br/>
+			<%= @email_address %>
+			<br/>
+			<%= @email_passwd %>
+
+			<br/><br/>
+			<% @emails.each do |email| %>
+			<h3><%= email.subject %></h3>
+			<p><%= email.body %></p>
+			<% end %>
+
+			
 		</h1>
 		<div id="app"></div>
 		</body>

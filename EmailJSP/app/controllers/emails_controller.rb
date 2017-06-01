@@ -30,8 +30,20 @@ class EmailsController < ApplicationController
   end
 
   def inbox
-    @email_id = email_id
+    @email_id = email_id 
     @email = Email.find_by(id: @email_id)
+    @email_address = @email.email
+    @email_passwd = @email.senha
+    user_name = @email_address.to_s().split("@").first
+    
+    Mail.defaults do
+      retriever_method :pop3, :address    => "pop.gmail.com",
+                       :port       => 995,
+                       :user_name  => user_name,
+                       :password   => 'cotuca2017',
+                       :enable_ssl => true
+    end
+    @emails = Mail.find(:what => :first, :count => 10, :order => :asc)
   end
 
   def profile
