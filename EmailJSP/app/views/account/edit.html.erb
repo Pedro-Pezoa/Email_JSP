@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Nova conta</title>
+		<%= stylesheet_link_tag "application", media: "all" %>
+		<%= stylesheet_link_tag "master", media: "all" %>
+	</head>
+	<body>
+		<div id="app">
+			<center>
+				
+				<%= render "shared/menu" %>
+				
+				<form action="./new" method="POST">
+					<fieldset>
+						<legend>Criar conta</legend>
+						<input class="text" placeholder="Seu nome" name="user[nome]" type="text"/>
+						<br/><br/>
+						<input class="text" placeholder="Senha" name="user[senha]" type="password"/>
+						<br/><br/>
+						<input class="btn btn-default" name="" type="submit" value="Criar"/></fieldset>
+				</form>
+			</center>
+		</div>
+	</body>
+</html>

@@ -22,6 +22,15 @@ class AccountController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def edit_commit
+  end
+
+  def destroy
+  end
+
   def user_params
     params[:user].permit(:nome, :senha)
   end

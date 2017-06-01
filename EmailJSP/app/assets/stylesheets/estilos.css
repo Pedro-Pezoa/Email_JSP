@@ -58,7 +58,7 @@
     transform: translateX(-50%);
 }
 
-#dInformacoes form{
+#dInformacoes form {
     margin: -5px;
 }
 
@@ -67,6 +67,11 @@
     width: 42px;
 }
 
-form{
+form {
     float: left;
+}
+
+.txtHidden {
+    visibility: hidden; 
+    position: absolute;
 }

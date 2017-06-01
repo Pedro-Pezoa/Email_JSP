@@ -5,11 +5,14 @@ Rails.application.routes.draw do
   post 'emails/profile', to: 'emails#profile_commit' 
   post 'emails/exit'
   post 'emails/new'
+  post 'emails/edit'
   post 'emails/show'
   post 'emails/destroy'
 
   get 'account/new'
+  get 'account/edit'
   post 'account/new', to: 'account#new_commit'
+  post 'account/edit', to: 'account#edit_commit'
   post 'account/login'
 
   post 'api/email/show'

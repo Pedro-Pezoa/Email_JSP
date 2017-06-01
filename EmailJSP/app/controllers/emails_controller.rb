@@ -4,6 +4,7 @@ class EmailsController < ApplicationController
 
   def index
     if session[:user_id]
+      @user_id = session[:user_id]
       @user_name = User.find_by(id: session[:user_id]).nome
       if params[:email]
         if params[:email][:email]
@@ -14,7 +15,6 @@ class EmailsController < ApplicationController
            end
          end
        
-
       else
         @emails = Email.where(user_id: session[:user_id])
 
@@ -49,12 +49,23 @@ class EmailsController < ApplicationController
     redirect_to "/emails/"
   end
 
+  def edit
+    @email = Email.find_by(email: email_param(:email),
+                           user_id: email_param(:user_id))
+    @email.update(senha: email_param(:senha))
+    if @email
+      ret = true
+    else
+      ret = false
+    end
+    redirect_to "/emails/"
+  end
+
   def show
     emails = Email.where(email: email_param(:email))
     unless @emails
       emails = []
     end
-    session[:emails] =
     redirect_to "/emails/"
   end
 
