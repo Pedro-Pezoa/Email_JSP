@@ -75,3 +75,14 @@ form {
     visibility: hidden; 
     position: absolute;
 }
+
+.botaoAlterar {
+    width: 15%;
+    height: 20%;
+    font-size: 20px;
+}
+
+#btnExcluir {
+    width: 10%;
+    height: 20%;
+}

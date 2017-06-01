@@ -26,9 +26,29 @@ class AccountController < ApplicationController
   end
 
   def edit_commit
+    @user = User.find_by(id: session[:user_id])
+    nome = user_param(:nome)
+    senha = user_param(:senha)
+    senhaConf = user_param(:senha)
+
+    if senha == senhaConf
+      @user.update(nome: user_param(:nome))
+      @user.update(senha: user_param(:senha))
+
+      if @user
+        ret = true
+      else
+        ret = false
+      end
+    end
+    redirect_to "/emails/"
   end
 
   def destroy
+  end
+
+  def user_param(key)
+    params[:user][key]
   end
 
   def user_params

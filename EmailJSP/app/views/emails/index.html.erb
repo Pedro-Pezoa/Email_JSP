@@ -21,9 +21,12 @@
 
 			<%= render "shared/menu" %>
 			
-			<h3>
-				Você é <%= @user_name %>
-			</h3>
+			<div id='alterar'>
+
+				<button id='btnAlterar' class='btn btn-default form-control botaoAlterar' onclick="alterarUsuario('<%= @user_id %>', '<%= @user_name %>', '<%= @user_password %>')">
+				Você é <%= @user_name %>&nbsp;<span class='glyphicon glyphicon-pencil botaoAlterar'></span></button>
+			</div>
+
 			<div id='dPrincipal' class='col-sm-6 noMeio'> 
             	<div id='dCabecalho' class='col-sm-12'>
 

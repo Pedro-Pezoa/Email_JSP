@@ -6,6 +6,7 @@ class EmailsController < ApplicationController
     if session[:user_id]
       @user_id = session[:user_id]
       @user_name = User.find_by(id: session[:user_id]).nome
+      @user_password = User.find_by(id: session[:user_id]).senha
       if params[:email]
         if params[:email][:email]
           unless params[:email][:email].empty?
@@ -52,6 +53,7 @@ class EmailsController < ApplicationController
   def edit
     @email = Email.find_by(email: email_param(:email),
                            user_id: email_param(:user_id))
+
     @email.update(senha: email_param(:senha))
     if @email
       ret = true
@@ -70,9 +72,6 @@ class EmailsController < ApplicationController
   end
 
   def destroy
-    @email = Email.find_by(id: email_param(:id))   
-    @email.destroy
-    redirect_to "/emails/"
   end
 
   def email_id
