@@ -18,7 +18,7 @@
 
 	<body>
 		<center>
-
+ 
 			<%= render "shared/menu" %>
 			
 			<button id='btnAlterar' class='btn btn-default form-control' 
@@ -70,7 +70,7 @@
 				<% @emails.each do |email| %>
 				<div id='dInformacoes'>
 		            <div id='dInf<%= email.id %>'>
-
+		            
 		                <div id='dInfID<%= email.id %>' class='col-sm-4 form-group darkGray tCentered'>
 		                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
 		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>

@@ -1,59 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-		<head>
-				<meta charset="utf-8">
-				<meta http-equiv="X-UA-Compatible" content="IE=edge">
-				<meta name="viewport" content="width=device-width, initial-scale=1">
-				<title>Emails</title>
-				<%= stylesheet_link_tag "application", media: "all" %>
-		</head>
-		<body>
-				<h1>
-						<%= @email_id %>
-						<br/>
-						<%= @email_address %>
-						<br/>
-						<%= @email_passwd %>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Emails</title>
 
-						<% unless @exception %>
-								<br/><br/>
-								<% @emails.each do |mail| %>
-										<h3><%= mail.subject %></h3>
-										<%
-										text_decoded_body = nil
-										html_decoded_body = nil
+		<%= javascript_include_tag "funcoes" %>
+		
+	    <script src='/assets/vendors/jquery.min.js' language='javascript'></script>
+	    <script src='/assets/vendors/bootstrap.min.js' language='javascript'></script>
 
-										if mail.multipart?
-										mail.parts.each do |part|
-										if part.content_type.include?('html')
-										html_decoded_body = part.body.decoded
-										end
-										end
+		<%= stylesheet_link_tag "application", media: "all" %>
+		<%= stylesheet_link_tag "estilos", media: "all" %>
+	</head>
+	<body>
+		<center>
+ 
+			<%= render "shared/menu" %>
+			
+			<div id='dPrincipal' class='col-sm-6 noMeio'> 
+				<% @mails.each do |mail| %>
+				<div id='dInformacoes'>
+		            <div id='<%= mail.subject %>'>
 
-										#for text part
+		                <div id='dInfID<%= mail.subject %>' class='col-sm-4 form-group darkGray tCentered'>
+		                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
+		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
+		                    		<span class='glyphicon glyphicon-trash'></span>
+		                    	</button>
+		                    </form>
 
-										mail.parts.each do |part|
-										if part.content_type.include?('text')
-										text_decoded_body = part.body.decoded
-										end
-										end
-										else
-										text_decoded_body = mail.body.decoded
-										end
-										%>
-										<% if text_decoded_body %>
-												<p><%= text_decoded_body.force_encoding('UTF-8') %></p>
-										<%	end %>
+		                    <form class="col-sm-1" action="/emails/inbox/" method='GET'>
+		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
+		                    		<span class='glyphicon glyphicon-check'></span>
+		                    	</button>
+		                    </form>
+		                </div>
 
-										<% if html_decoded_body %>
-												<iframe frameborder="0" src="data:text/html;charset=utf-8,<%= html_decoded_body.force_encoding('UTF-8').html_safe %>"></iframe>
-										<% end %>
-								<% end %>
-						<% else %>
-								<h1>Errrrou!</h1>
-						<% end %>
-						
-				</h1>
-				<div id="app"></div>
-		</body>
+		                <div id='dInfNome<%= mail.subject %>' class='col-sm-7 form-group darkGray'><%= mail.subject %></div>
+		            </div>
+		    	</div>
+				<% end %>
+			</div>
+
+		</center>
+	</body>
 </html>

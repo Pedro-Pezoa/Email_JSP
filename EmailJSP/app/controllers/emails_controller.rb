@@ -30,24 +30,17 @@ class EmailsController < ApplicationController
   end
 
   def inbox
-    begin
-      @email_id = email_id 
-      @email = Email.find_by(id: @email_id)
-      @email_address = @email.email
-      @email_passwd = @email.senha
-      user_name = @email_address.to_s().split("@").first
-      
-      Mail.defaults do
-        retriever_method :pop3, :address    => "pop.gmail.com",
-                         :port       => 995,
-                         :user_name  => 'joseDoSudao',
-                         :password   => 'superSenhaSecreta',
-                         :enable_ssl => true
-      end
-      @emails = Mail.find(:what => :first, :count => 10, :order => :asc)
-    rescue
-      @exception = true
-    end 
+    @email = Email.find_by(id: email_param(:id))
+    nome = @email.email
+    senha = @email.senha
+    Mail.defaults do
+      retriever_method :pop3, :address  => "pop.gmail.com",
+                       :port       => 995,
+                       :user_name  => nome,
+                       :password   => senha,
+                       :enable_ssl => true
+    end
+    @mails = Mail.all
   end
 
   def profile
