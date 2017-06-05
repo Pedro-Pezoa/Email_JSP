@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Emails</title>
-		<%= stylesheet_link_tag "application", media: "all" %>
-	</head>
-	<body>
-		<h1>
-			<%= @email_id %>
-			<br/>
-			<%= @email_address %>
-			<br/>
-			<%= @email_passwd %>
+		<head>
+				<meta charset="utf-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<title>Emails</title>
+				<%= stylesheet_link_tag "application", media: "all" %>
+		</head>
+		<body>
+				<h1>
+						<%= @email_id %>
+						<br/>
+						<%= @email_address %>
+						<br/>
+						<%= @email_passwd %>
 
-			<br/><br/>
-			<% @emails.each do |email| %>
-			<h3><%= email.subject %></h3>
-			<p><%= email.body %></p>
-			<% end %>
+						<% unless @exception %>
+								<br/><br/>
+								<% @emails.each do |mail| %>
+										<h3><%= mail.subject %></h3>
+										<%
+										text_decoded_body = nil
+										html_decoded_body = nil
 
-			
-		</h1>
-		<div id="app"></div>
+										if mail.multipart?
+										mail.parts.each do |part|
+										if part.content_type.include?('html')
+										html_decoded_body = part.body.decoded
+										end
+										end
+
+										#for text part
+
+										mail.parts.each do |part|
+										if part.content_type.include?('text')
+										text_decoded_body = part.body.decoded
+										end
+										end
+										else
+										text_decoded_body = mail.body.decoded
+										end
+										%>
+										<% if text_decoded_body %>
+												<p><%= text_decoded_body.force_encoding('UTF-8') %></p>
+										<%	end %>
+
+										<% if html_decoded_body %>
+												<iframe frameborder="0" src="data:text/html;charset=utf-8,<%= html_decoded_body.force_encoding('UTF-8').html_safe %>"></iframe>
+										<% end %>
+								<% end %>
+						<% else %>
+								<h1>Errrrou!</h1>
+						<% end %>
+						
+				</h1>
+				<div id="app"></div>
 		</body>
 </html>
