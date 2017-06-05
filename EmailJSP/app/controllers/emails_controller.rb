@@ -72,6 +72,8 @@ class EmailsController < ApplicationController
   end
 
   def destroy
+    Email.find_by(id: email_param(:id)).destroy
+    redirect_to "/emails/"
   end
 
   def email_id

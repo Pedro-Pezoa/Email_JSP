@@ -29,17 +29,22 @@ class AccountController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     nome = user_param(:nome)
     senha = user_param(:senha)
-    senhaConf = user_param(:senha)
 
-    if senha == senhaConf
-      @user.update(nome: user_param(:nome))
-      @user.update(senha: user_param(:senha))
+    if nome == ""
+      nome = @user.nome
+    end
 
-      if @user
-        ret = true
-      else
-        ret = false
-      end
+    if senha == ""
+      senha = @user.senha
+    end
+    
+    @user.update(nome: user_param(:nome))
+    @user.update(senha: user_param(:senha))
+
+    if @user
+      ret = true
+    else
+      ret = false
     end
     redirect_to "/emails/"
   end

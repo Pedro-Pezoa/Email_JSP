@@ -50,39 +50,48 @@ function trocarCaracter(o)
       password.value += '•';
 }
 
-function alterarUsuario(id,nome, senha)
+function alterarVisibility()
 {
-    if (naoEstaEditando())
+    var btnAlterar = document.getElementById('btnAlterar');
+    var formAlteracao = document.getElementById('formAlteracao');
+
+    if (btnAlterar.style.visibility == 'hidden')
     {
-        var btnAlterar = document.getElementById('btnAlterar');
-        btnAlterar.hidden = true;
-
-        var divao = $('#alterar');
-
-        var str = '<form action="/account/edit" method="post" class="numalinha">'+
-        '<input type="text" value="'+id+'" name="email[user_id]" class="form-control" style="visibility:hidden;">'+
-        '<input type="text" value="'+nome+'" name="user[nome]" class="form-control">'+
-        '<input type="password" name="senhaAntiga" value="'+senha+'" class="form-control"/>'+
-        '<input type="password" id="senhaNova" name="user[senha]" class="form-control"/>'+
-        '<input type="password" id="senhaConf" name="senhaConfirmada" class="form-control"/>'+
-        '<button type="submit" class="btn btn-default form-control botaoAntes numalinha" onclick="verificaSenha()">Confirmar</button></form>';
-        divao[0].innerHTML = str;
+        btnAlterar.style.visibility = 'visible';
+        formAlteracao.style.visibility = 'hidden';
+    }
+    else
+    {
+        btnAlterar.style.visibility = 'hidden';
+        formAlteracao.style.visibility = 'visible';
     }
 }
 
-function verificaSenha()
+function verificaDados()
 {
-    if ($('#senhaNova').val() == $('#senhaConf').val() && confirm("Deseja alterar sua conta?"))
+    if ($('#username').val() == "")
     {
-        alert('Conta alterada com sucesso');
+        alert('Nome inválido');
+    }
+
+    else if ($('#senhaNova').val() == $('#senhaConf').val())
+    {
+        if ($('#senhaNova').val() == "")
+            $('#senhaNova').val($('#senhaAntiga').val());
+
+        if (confirm("Deseja alterar sua conta?"))
+            alert('Conta alterada com sucesso');
+        
+        else
+        {
+            $('#senhaNova').val($('#senhaAntiga').val());
+            alert('Alteração cancelada');
+        }
     }
 
     else
     {
-        var senhaAntiga = document.getElementById('senhaAntiga');
-        var senhaNova = document.getElementById('senhaNova');
-        senhaNova.value = senhaAntiga.value;
-        
+        $('#senhaNova').val($('#senhaAntiga').val());
         alert('Confirmação de senha inválida');
     }
 }

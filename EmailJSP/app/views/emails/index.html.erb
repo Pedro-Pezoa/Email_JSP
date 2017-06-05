@@ -21,11 +21,22 @@
 
 			<%= render "shared/menu" %>
 			
-			<div id='alterar'>
+			<button id='btnAlterar' class='btn btn-default form-control' 
+					onclick='alterarVisibility()'>Você é <%= @user_name %>&nbsp;
+				<span class='glyphicon glyphicon-pencil'></span>
+			</button>
 
-				<button id='btnAlterar' class='btn btn-default form-control botaoAlterar' onclick="alterarUsuario('<%= @user_id %>', '<%= @user_name %>', '<%= @user_password %>')">
-				Você é <%= @user_name %>&nbsp;<span class='glyphicon glyphicon-pencil botaoAlterar'></span></button>
-			</div>
+			<form action="/account/edit" method="post" id="formAlteracao">
+		        <input type="text" value='<%= @user_name %>' name="user[nome]" class="form-control">
+		        <input type="password" id="senhaNova" name="user[senha]" class="form-control"/>
+		        <input type="password" id="senhaConf" name="senhaConfirmada" class="form-control"/>
+		        <button type="submit" class="btn btn-default form-control numalinha" 
+		        		onclick="verificaDados()">Confirmar</button>
+		        <button type="submit" class="btn btn-default form-control numalinha" 
+		        		onclick="alterarVisibility()">Cancelar</button>
+		        <input type="password" id="senhaAntiga" value='<%= @user_password %>' style="visibility:hidden;" 
+		        	   class="form-control"/>
+		    </form>
 
 			<div id='dPrincipal' class='col-sm-6 noMeio'> 
             	<div id='dCabecalho' class='col-sm-12'>

@@ -76,13 +76,13 @@ form {
     position: absolute;
 }
 
-.botaoAlterar {
+#btnAlterar {
     width: 15%;
     height: 20%;
     font-size: 20px;
 }
 
-#btnExcluir {
-    width: 10%;
-    height: 20%;
+#formAlteracao {
+    visibility: hidden; 
+    position: absolute;
 }
