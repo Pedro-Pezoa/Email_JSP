@@ -1,3 +1,7 @@
+body {
+    font-size: 17px;
+}
+
 .tCentered {
     text-align: center;
 }
@@ -53,9 +57,9 @@
 }
 
 .noMeio {
-    position: absolute;
     left: 50%; 
     transform: translateX(-50%);
+    height: 150%;
 }
 
 #dInformacoes form {
@@ -77,12 +81,16 @@ form {
 }
 
 #btnAlterar {
-    width: 15%;
+    width: 30%;
     height: 20%;
     font-size: 20px;
 }
 
-#formAlteracao {
-    visibility: hidden; 
-    position: absolute;
+#nomeUsuario {
+}
+
+.senhaUsuario {
+}
+
+.botoesAlteracao {
 }

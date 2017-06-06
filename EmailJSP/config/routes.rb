@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'emails/', to: 'emails#index'
   post 'emails/profile', to: 'emails#profile_commit' 
   post 'emails/exit'
+  get 'emails/exitInbox'
   post 'emails/new'
   post 'emails/edit'
   post 'emails/show'

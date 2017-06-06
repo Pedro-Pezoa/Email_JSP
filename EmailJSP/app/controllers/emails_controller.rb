@@ -30,23 +30,31 @@ class EmailsController < ApplicationController
   end
 
   def inbox
-    @email = Email.find_by(id: email_param(:id))
-    nome = @email.email
-    senha = @email.senha
-    Mail.defaults do
-      retriever_method :pop3, :address  => "pop.gmail.com",
-                       :port       => 995,
-                       :user_name  => nome,
-                       :password   => senha,
-                       :enable_ssl => true
+    unless session[:unreload]
+      session[:qtosMails] = 10
+      session[:unreload] = true
+    else
+      session[:qtosMails] += 10
     end
-    @mails = Mail.all
+      @email = Email.find_by(id: email_param(:id))
+      nome = @email.email
+      senha = @email.senha
+
+      Mail.defaults do
+        retriever_method :imap, :address  => "imap.gmail.com",
+                         :port       => 993,
+                         :user_name  => nome,
+                         :password   => senha,
+                         :enable_ssl => true
+      end          
+      @mails = Mail.find(:what => :last, :count => session[:qtosMails], :order => :asc)
   end
 
-  def profile
-  end
-
-  def profile_commit
+  def exitInbox
+    session.delete(:qtosMails)
+    session.delete(:unreload)
+    session.delete(:Mail)
+    redirect_to "/emails/"
   end
 
   def exit

@@ -21,24 +21,42 @@
  
 			<%= render "shared/menu" %>
 			
-			<button id='btnAlterar' class='btn btn-default form-control' 
-					onclick='alterarVisibility()'>Você é <%= @user_name %>&nbsp;
-				<span class='glyphicon glyphicon-pencil'></span>
-			</button>
+			<div id='dPrincipal' class='col-sm-6 noMeio'>
+			<div class="row">
+				<div id="dAlteraUsuario" class='col-sm-12' >
 
-			<form action="/account/edit" method="post" id="formAlteracao">
-		        <input type="text" value='<%= @user_name %>' name="user[nome]" class="form-control">
-		        <input type="password" id="senhaNova" name="user[senha]" class="form-control"/>
-		        <input type="password" id="senhaConf" name="senhaConfirmada" class="form-control"/>
-		        <button type="submit" class="btn btn-default form-control numalinha" 
-		        		onclick="verificaDados()">Confirmar</button>
-		        <button type="submit" class="btn btn-default form-control numalinha" 
-		        		onclick="alterarVisibility()">Cancelar</button>
-		        <input type="password" id="senhaAntiga" value='<%= @user_password %>' style="visibility:hidden;" 
-		        	   class="form-control"/>
-		    </form>
+					<button id='btnAlterar' class='btn btn-default ' 
+							onclick='alterarVisibility()'>Bem vindo <%= @user_name %>&nbsp;
+						<span class='glyphicon glyphicon-pencil'></span>
+					</button><br>
 
-			<div id='dPrincipal' class='col-sm-6 noMeio'> 
+				    <form action="/account/edit" method="post" id="formAlteracao"  style="visibility:hidden;">
+				        <div id='dValorNomeUsuario' class='col-sm-5'>
+					        <label>Usuário:</label><br>
+					        <input type="text" value='<%= @user_name %>' id="nomeUsuario" name="user[nome]" class="form-control">
+					        <input type="password" id="senhaAntiga" value='<%= @user_password %>' class="form-control txtHidden"/>
+						</div>
+
+						<div id='dValorSenhaNova' class='col-sm-4'>
+					        <label>Nova senha:</label><br>
+					        <input type="password" id="senhaNova" name="user[senha]" class="form-control senhaUsuario"/>
+					    </div>
+
+					    <div id='dValorSenhaConf' class='col-sm-2'>
+					        <label>Confirmar senha:</label><br>
+					        <input type="password" id="senhaConf" name="senhaConfirmada" class="form-control senhaUsuario"/>
+					    </div>
+
+						<div id='dValorBotao' class='col-sm-1'>
+					        <button type="submit" class="btn btn-default form-control" onclick="verificaDados()">Confirmar</button>
+					        <input type="button" class="btn btn-default form-control" onclick="alterarVisibility()" value="Cancelar" />
+					    </div>
+				    </form>
+					
+				</div>
+			</div>
+
+			<div class="row">
             	<div id='dCabecalho' class='col-sm-12'>
 
                 	<div id='dValorID' class='col-sm-2'>
@@ -66,31 +84,33 @@
 		                </form>
 	                </div>
             	</div>
-
+            </div>
 				<% @emails.each do |email| %>
-				<div id='dInformacoes'>
-		            <div id='dInf<%= email.id %>'>
-		            
-		                <div id='dInfID<%= email.id %>' class='col-sm-4 form-group darkGray tCentered'>
-		                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
-		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
-		                    		<span class='glyphicon glyphicon-trash'></span>
-		                    	</button>
-		                    </form>
+				<div class="row">
+					<div id='dInformacoes'>
+			            <div id='dInf<%= email.id %>'>
+			            
+			                <div id='dInfID<%= email.id %>' class='col-sm-4 form-group darkGray tCentered'>
+			                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
+			                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
+			                    		<span class='glyphicon glyphicon-trash'></span>
+			                    	</button>
+			                    </form>
 
-		                    <form class="col-sm-3" action="/emails/inbox/" method='GET'>
-		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
-		                    		<span class='glyphicon glyphicon-check'></span>
-		                    	</button>
-		                    </form>
-		                </div>
+			                    <form class="col-sm-3" action="/emails/inbox/" method='GET'>
+			                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= email.id %>'>
+			                    		<span class='glyphicon glyphicon-check'></span>
+			                    	</button>
+			                    </form>
+			                </div>
 
-		                <div id='dInfNome<%= email.id %>' class='col-sm-5 form-group darkGray'><%= email.email %></div>
+			                <div id='dInfNome<%= email.id %>' class='col-sm-5 form-group darkGray'><%= email.email %></div>
 
-		                <div id='dInfSenha<%= email.id %>' class='col-sm-3 form-group darkGray' 
-		                ondblclick='apareceSenhaX(<%= email.id %>, <%= @user_id %>)'><%= email.senha %></div>
-		                <script type="text/javascript">trocarSenha(<%= email.id %>);</script>
-		            </div>
+			                <div id='dInfSenha<%= email.id %>' class='col-sm-3 form-group darkGray' 
+			                ondblclick='apareceSenhaX(<%= email.id %>, <%= @user_id %>)'><%= email.senha %></div>
+			                <script type="text/javascript">trocarSenha(<%= email.id %>);</script>
+			            </div>
+			    	</div>
 		    	</div>
 				<% end %>
 
