@@ -35,10 +35,12 @@ class EmailsController < ApplicationController
     nome = @email.email
     senha = @email.senha
 
-    @amount = 10
+    @comeco = 0
+    @fim = 10
     
-    if email_param(:amount)
-      @amount = email_param(:amount)      
+    if email_param(:fim)
+      @comeco = @fim
+      @fim += email_param(:fim).to_i
     end 
 
     Mail.defaults do
@@ -48,7 +50,8 @@ class EmailsController < ApplicationController
                        :password   => senha,
                        :enable_ssl => true
     end
-    @mails = Mail.find(:what => :last, :count => @amount, :order => :desc)
+    @mails = []
+    @mails = Mail.find(:what => :last, :count => @fim, :order => :desc)[@comeco..@fim]
   end
 
   def exit

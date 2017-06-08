@@ -44,13 +44,13 @@
 				<% end %>
 
 				<form action="/emails/inbox/" method="GET">
-						<input name="email[amount]" type="hidden" value="<%= @amount.to_i + 10 %>"/>
+						<input name="email[fim]" type="hidden" value="<%= @fim.to_i %>"/>
 						<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
-						<input class="btn btn-default" type="submit" value="próximo"/>
+						<input class="btn btn-default" type="submit" value="Próximo"/>
 				</form>
 
-				<form action="/emails/exitInbox" method="GET">
-					<input class="btn btn-default" type="submit" value="voltar"/>
+				<form action="/emails/" method="GET">
+					<input class="btn btn-default" type="submit" value="menu"/>
 				</form>
 			</div>
 
