@@ -44,7 +44,9 @@
 				<% end %>
 
 				<form action="/emails/inbox/" method="GET">
-					<input class="btn btn-default" type="submit" value="próximo"/>
+						<input name="email[amount]" type="hidden" value="<%= @amount.to_i + 10 %>"/>
+						<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+						<input class="btn btn-default" type="submit" value="próximo"/>
 				</form>
 
 				<form action="/emails/exitInbox" method="GET">

@@ -10,12 +10,12 @@ class EmailsController < ApplicationController
       if params[:email]
         if params[:email][:email]
           unless params[:email][:email].empty?
-             @emails = Email.where(email: email_param(:email))
-           else
+            @emails = Email.where(email: email_param(:email))
+          else
             @emails = Email.where(user_id: session[:user_id])
-           end
-         end
-       
+          end
+        end
+        
       else
         @emails = Email.where(user_id: session[:user_id])
 
@@ -30,31 +30,25 @@ class EmailsController < ApplicationController
   end
 
   def inbox
-    unless session[:unreload]
-      session[:qtosMails] = 10
-      session[:unreload] = true
-    else
-      session[:qtosMails] += 10
+    @email_id = email_param(:id)
+    @email = Email.find_by(id: @email_id)
+    nome = @email.email
+    senha = @email.senha
+
+    @amount = 10
+    
+    if email_param(:amount)
+      @amount = email_param(:amount)      
+    end 
+
+    Mail.defaults do
+      retriever_method :imap, :address  => "imap.gmail.com",
+                       :port       => 993,
+                       :user_name  => nome,
+                       :password   => senha,
+                       :enable_ssl => true
     end
-      @email = Email.find_by(id: email_param(:id))
-      nome = @email.email
-      senha = @email.senha
-
-      Mail.defaults do
-        retriever_method :imap, :address  => "imap.gmail.com",
-                         :port       => 993,
-                         :user_name  => nome,
-                         :password   => senha,
-                         :enable_ssl => true
-      end          
-      @mails = Mail.find(:what => :last, :count => session[:qtosMails], :order => :asc)
-  end
-
-  def exitInbox
-    session.delete(:qtosMails)
-    session.delete(:unreload)
-    session.delete(:Mail)
-    redirect_to "/emails/"
+    @mails = Mail.find(:what => :last, :count => @amount, :order => :desc)
   end
 
   def exit
