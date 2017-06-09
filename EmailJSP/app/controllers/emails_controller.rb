@@ -44,7 +44,8 @@ class EmailsController < ApplicationController
     end 
 
     Mail.defaults do
-      retriever_method :imap, :address  => "imap.gmail.com",
+      retriever_method :imap, 
+                       :address  => "imap.gmail.com",
                        :port       => 993,
                        :user_name  => nome,
                        :password   => senha,
@@ -52,6 +53,34 @@ class EmailsController < ApplicationController
     end
     @mails = []
     @mails = Mail.find(:what => :last, :count => @fim, :order => :desc)[@comeco..@fim]
+  end
+
+  def sendEmail
+    @email_id = email_param(:id)
+    @email = Email.find_by(id: @email_id)
+    nome = @email.email
+    senha = @email.senha
+
+    paraQuem = email_param(:paraQuem)
+    assunto = email_param(:assunto)
+    texto = email_param(:texto)
+
+    Mail.defaults do
+      delivery_method :smtp, 
+                      :address              => "smtp.gmail.com",
+                      :port                 => 587,
+                      :user_name            => nome,
+                      :password             => senha,
+                      :authentication       => 'plain',
+                      :enable_starttls_auto => true
+    end
+
+    Mail.deliver do
+      to paraQuem
+      from nome
+      subject assunto
+      body 
+    end
   end
 
   def exit

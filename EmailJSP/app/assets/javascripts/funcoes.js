@@ -1,4 +1,4 @@
-function apareceSenhaX(X, id)
+ function apareceSenhaX(X, id)
 {
     if (naoEstaEditando())
     {
@@ -20,6 +20,14 @@ function apareceSenhaX(X, id)
 function naoEstaEditando()
 {
     return ($('.estaEditando')[0] === undefined);
+}
+
+function mudarTexto()
+{
+    var Ftexto = document.getElementById('Ftexto');
+    var birl = Ftexto.innerHTML
+    Ftexto.value = Ftexto.innerHTML
+    Ftexto.innerHTML = birl
 }
 
 function mudarNome()

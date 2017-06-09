@@ -49,8 +49,25 @@
 						<input class="btn btn-default" type="submit" value="Próximo"/>
 				</form>
 
+				<form action="/emails/sendEmail" method="POST">
+					<label>Para quem:</label>
+					<input type="text" id="paraQuem" name="email[paraQuem]" class="form-control"/>
+
+					<label>De quem:</label>
+					<input type="text" id="deQuem" name="email[deQuem]" class="form-control"/>
+
+					<label>Assunto:</label>
+					<input type="text" id="assunto" name="email[assunto]" class="form-control"/>
+
+					<label>Texto:</label>
+					<textarea id="Ftexto" name="email[texto]" value="" onkeypress="mudarTexto()"></textarea>
+
+					<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+					<input class="btn btn-default" type="submit" value="Send"/>
+				</form>
+
 				<form action="/emails/" method="GET">
-					<input class="btn btn-default" type="submit" value="menu"/>
+					<input class="btn btn-default" type="submit" value="Menu"/>
 				</form>
 			</div>
 

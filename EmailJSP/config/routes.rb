@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'emails/edit'
   post 'emails/show'
   post 'emails/destroy'
+  post 'emails/sendEmail'
 
   get 'account/new'
   get 'account/edit'
