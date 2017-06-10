@@ -11,7 +11,7 @@
             '<input type="text" value="'+nomeEmail.innerHTML+'" name="email[email]" class="form-control" style="visibility:hidden; position:absolute;">'+
             '<input type="text" name="email[user_id]" value="'+id+'" class="form-control" style="visibility:hidden; position:absolute;" />'+
             '<input type="password" id="altS" name="email[senha]" class="form-control estaEditando botaoDepoisSenha numalinha" required>'+
-            '<button type="submit" class="btn btn-default form-control botaoAntes numalinha" style="visibility:hidden; position:absolute;"><span class="glyphicon glyphicon-search"></span></button></form>';
+								'<button type="submit" class="btn btn-default form-control botaoAntes numalinha" style="visibility:hidden; position:absolute;"><span class="glyphicon glyphicon-search"></span></button></form>';
             divao[0].innerHTML = str;
         }
     }
@@ -63,15 +63,15 @@ function alterarVisibility()
     var btnAlterar = document.getElementById('btnAlterar');
     var formAlteracao = document.getElementById('formAlteracao');
 
-    if (btnAlterar.style.visibility == 'hidden')
+    if (btnAlterar.style.display == 'none')
     {
-        btnAlterar.style.visibility = 'visible';
-        formAlteracao.style.visibility = 'hidden';
+        btnAlterar.style.display = 'block';
+        formAlteracao.style.display = 'none';
     }
     else
     {
-        btnAlterar.style.visibility = 'hidden';
-        formAlteracao.style.visibility = 'visible';
+        btnAlterar.style.display = 'none';
+        formAlteracao.style.display = 'block';
     }
 }
 
