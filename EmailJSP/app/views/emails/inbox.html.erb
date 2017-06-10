@@ -8,69 +8,82 @@
 
 		<%= javascript_include_tag "funcoes" %>
 		
-	    <script src='/assets/vendors/jquery.min.js' language='javascript'></script>
-	    <script src='/assets/vendors/bootstrap.min.js' language='javascript'></script>
+	  <script src='/assets/vendors/jquery.min.js' language='javascript'></script>
+	  <script src='/assets/vendors/bootstrap.min.js' language='javascript'></script>
 
 		<%= stylesheet_link_tag "application", media: "all" %>
 		<%= stylesheet_link_tag "estilos", media: "all" %>
 	</head>
 	<body>
 		<center>
- 
-			<%= render "shared/menu" %>
 			
-			<div id='dPrincipal' class='col-sm-6 noMeio'> 
-				<% @mails.each do |mail| %>
-				<div id='dInformacoes'>
-		            <div id='<%= mail.subject %>'>
-
-		                <div id='dInfID<%= mail.subject %>' class='col-sm-4 form-group darkGray tCentered'>
-		                    <form class="col-sm-3" action="/emails/destroy/" method='POST'>
-		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
-		                    		<span class='glyphicon glyphicon-trash'></span>
-		                    	</button>
-		                    </form>
-
-		                    <form class="col-sm-1" action="/emails/inbox/" method='GET'>
-		                    	<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
-		                    		<span class='glyphicon glyphicon-check'></span>
-		                    	</button>
-		                    </form>
-		                </div>
-
-		                <div id='dInfNome<%= mail.subject %>' class='col-sm-7 form-group darkGray'><%= mail.subject %></div>
-		            </div>
-		    	</div>
-				<% end %>
-
-				<form action="/emails/inbox/" method="GET">
-						<input name="email[fim]" type="hidden" value="<%= @fim.to_i %>"/>
-						<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
-						<input class="btn btn-default" type="submit" value="Próximo"/>
-				</form>
-
-				<form action="/emails/sendEmail" method="POST">
-					<label>Para quem:</label>
-					<input type="text" id="paraQuem" name="email[paraQuem]" class="form-control"/>
-
-					<label>De quem:</label>
-					<input type="text" id="deQuem" name="email[deQuem]" class="form-control"/>
-
-					<label>Assunto:</label>
-					<input type="text" id="assunto" name="email[assunto]" class="form-control"/>
-
-					<label>Texto:</label>
-					<textarea id="Ftexto" name="email[texto]" value="" onkeypress="mudarTexto()"></textarea>
-
-					<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
-					<input class="btn btn-default" type="submit" value="Send"/>
-				</form>
-
-				<form action="/emails/" method="GET">
-					<input class="btn btn-default" type="submit" value="Menu"/>
-				</form>
-			</div>
+			<%= render "shared/menu" %>
 
 		</center>
+
+		<div id="wrapper" class="container-fluid col-sm-8 noMeio">
+
+			<form action="/emails/" method="GET" class="row" style="float:unset">
+				<input class="btn btn-default" type="submit" value="Menu" style="margin-left: 0px"/>
+			</form>
+
+			<br/><br/>
+			
+			<form action="/emails/sendEmail" method="POST" class="row" style="float:unset">
+				<label>Para quem:</label>
+				<input type="text" id="paraQuem" name="email[paraQuem]" class="form-control"/>
+
+				<label>De quem:</label>
+				<input type="text" id="deQuem" name="email[deQuem]" class="form-control"/>
+
+				<label>Assunto:</label>
+				<input type="text" id="assunto" name="email[assunto]" class="form-control"/>
+
+				<label>Texto:</label><br/>
+				<textarea id="Ftexto" name="email[texto]" value="" onkeypress="mudarTexto()"></textarea><br/><br/>
+
+				<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+				<input class="btn btn-default" type="submit" value="Send"/>
+			</form>
+
+			<br/><br/><br/>
+			
+			<div class='container-fluid row'> 
+				<% @mails.each do |mail| %>
+					<div id='dInformacoes' class="row darkGray">
+						<div>
+							<div class='col-sm-4 form-group tCentered'>
+								<form class="col-sm-3" action="/emails/destroy/" method='POST'>
+									<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
+										<span class='glyphicon glyphicon-trash'></span>
+									</button>
+								</form>
+
+								<form class="col-sm-1" action="/emails/inbox/" method='GET'>
+									<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
+										<span class='glyphicon glyphicon-check'></span>
+									</button>
+								</form>
+							</div> 
+							<div class='container-fluid col-sm-7 form-group'>
+								<div class="row">
+									<%= mail.subject %>
+								</div>
+							</div>
+						</div>
+		    	</div>
+					<br/>
+				<% end %>
+
+				<form action="/emails/inbox/" method="GET" class="row" style="float:unset">
+					<input name="email[fim]" type="hidden" value="<%= @fim.to_i %>"/>
+					<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+					<input class="btn btn-default" type="submit" value="Próximo"/>
+				</form>
+
+				<br/><br/><br/><br/> <br/><br/>
+				
+			</div>
+		</div>
 	</body>
 </html>
