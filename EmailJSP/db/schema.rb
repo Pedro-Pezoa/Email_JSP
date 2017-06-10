@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527175439) do
+ActiveRecord::Schema.define(version: 20170610233634) do
 
   create_table "emails", force: :cascade do |t|
     t.integer "user_id"
@@ -18,7 +18,29 @@ ActiveRecord::Schema.define(version: 20170527175439) do
     t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "imaps_id"
+    t.integer "smtps_id"
+    t.index ["imaps_id"], name: "index_emails_on_imaps_id"
+    t.index ["smtps_id"], name: "index_emails_on_smtps_id"
     t.index ["user_id"], name: "index_emails_on_user_id"
+  end
+
+  create_table "imaps", force: :cascade do |t|
+    t.string "endereco"
+    t.string "porta"
+    t.string "autenticacao"
+    t.boolean "enable_ssl"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "smtps", force: :cascade do |t|
+    t.string "endereco"
+    t.string "porta"
+    t.string "autenticacao"
+    t.boolean "enable_starttls_auto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

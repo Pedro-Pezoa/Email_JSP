@@ -1,0 +1,2 @@
+class Imap < ApplicationRecord
+end
