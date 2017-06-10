@@ -22,12 +22,10 @@ function naoEstaEditando()
     return ($('.estaEditando')[0] === undefined);
 }
 
-function mudarTexto()
+function print()
 {
-    var Ftexto = document.getElementById('Ftexto');
-    var birl = Ftexto.innerHTML
-    Ftexto.value = Ftexto.innerHTML
-    Ftexto.innerHTML = birl
+    var arquivo = document.getElementById('arquivo');
+    alert(arquivo.value+"");
 }
 
 function mudarNome()

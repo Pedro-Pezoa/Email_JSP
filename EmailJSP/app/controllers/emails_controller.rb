@@ -38,9 +38,14 @@ class EmailsController < ApplicationController
     @comeco = 0
     @fim = 10
     
-    if email_param(:fim)
-      @comeco = @fim
-      @fim += email_param(:fim).to_i
+    if email_param(:prox)
+      @comeco = email_param(:fim).to_i
+      @fim = @comeco + 10
+    end 
+
+    else if email_param(:ant) && email_param(:comeco).to_i != 0
+      @fim = email_param(:comeco).to_i
+      @comeco = @fim - 10
     end 
 
     Mail.defaults do
@@ -61,6 +66,7 @@ class EmailsController < ApplicationController
     nome = @email.email
     senha = @email.senha
 
+    arquivo = email_param(:file)
     paraQuem = email_param(:paraQuem)
     assunto = email_param(:assunto)
     texto = email_param(:texto)
@@ -75,11 +81,26 @@ class EmailsController < ApplicationController
                       :enable_starttls_auto => true
     end
 
-    Mail.deliver do
-      to paraQuem
-      from nome
-      subject assunto
-      body 
+    unless arquivo.empty?
+      vetor = arquivo.split(";")
+
+      Mail.deliver do
+        to paraQuem
+        from nome
+        subject assunto
+        body texto + ""
+
+        vetor.each do |file|
+          add_file file + ""
+        end
+      end
+    else
+      Mail.deliver do
+        to paraQuem
+        from nome
+        subject assunto
+        body texto + ""
+      end
     end
   end
 

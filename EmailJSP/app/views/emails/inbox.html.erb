@@ -31,19 +31,19 @@
 			
 			<form action="/emails/sendEmail" method="POST" class="row" style="float:unset">
 				<label>Para quem:</label>
-				<input type="text" id="paraQuem" name="email[paraQuem]" class="form-control"/>
-
-				<label>De quem:</label>
-				<input type="text" id="deQuem" name="email[deQuem]" class="form-control"/>
+				<input type="email" id="paraQuem" name="email[paraQuem]" class="form-control" required/>
 
 				<label>Assunto:</label>
-				<input type="text" id="assunto" name="email[assunto]" class="form-control"/>
+				<input type="text" id="assunto" name="email[assunto]" class="form-control" required/>
 
 				<label>Texto:</label><br/>
-				<textarea id="Ftexto" name="email[texto]" value="" onkeypress="mudarTexto()"></textarea><br/><br/>
+				<textarea id="Ftexto" name="email[texto]" class="form-control"></textarea><br/><br/>
+
+				<label>Arquivos(Separe os arquivos com ";")</label>
+				<input type="text" id="arquivos" name="email[file]" placeholder="Coloque o diretório completo" />
 
 				<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
-				<input class="btn btn-default" type="submit" value="Send"/>
+				<input class="btn btn-default" type="submit" value="Send" onclick="print()" />
 			</form>
 
 			<br/><br/><br/>
@@ -78,7 +78,15 @@
 				<form action="/emails/inbox/" method="GET" class="row" style="float:unset">
 					<input name="email[fim]" type="hidden" value="<%= @fim.to_i %>"/>
 					<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+					<input name="email[prox]" type="hidden" value="prox"/>
 					<input class="btn btn-default" type="submit" value="Próximo"/>
+				</form>
+
+				<form action="/emails/inbox/" method="GET" class="row" style="float:unset">
+					<input name="email[comeco]" type="hidden" value="<%= @comeco.to_i %>"/>
+					<input name="email[id]" type="hidden" value="<%= @email_id %>"/>
+					<input name="email[ant]" type="hidden" value="ant"/>
+					<input class="btn btn-default" type="submit" value="Anterior"/>
 				</form>
 
 				<br/><br/><br/><br/> <br/><br/>
