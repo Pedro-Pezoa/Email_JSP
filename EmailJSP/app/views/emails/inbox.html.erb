@@ -52,26 +52,17 @@
 				<% @mails.each do |mail| %>
 					<div id='dInformacoes' class="row darkGray">
 						<div>
-							<div class='col-sm-4 form-group tCentered'>
-								<form class="col-sm-3" action="/emails/destroy/" method='POST'>
-									<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
-										<span class='glyphicon glyphicon-trash'></span>
-									</button>
-								</form>
-
-								<form class="col-sm-1" action="/emails/inbox/" method='GET'>
-									<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>'>
-										<span class='glyphicon glyphicon-check'></span>
-									</button>
-								</form>
+							<div class='col-sm-3 form-group tCentered'>
+								<button type='submit' id='dInfIDbtn2' name='email[id]' class='btn btn-default' value='<%= mail.subject %>' onclick="mostrarBody('<%= mail.subject %>');">
+									<span class='glyphicon glyphicon-check'></span>
+								</button>
+								<input id="txt<%= mail.subject %>" type="hidden" value="<%= mail.parts[1].to_s[76..mail.parts[1].to_s.length] %>"/>
 							</div> 
-							<div class='container-fluid col-sm-7 form-group'>
-								<div class="row">
-									<%= mail.subject %>
-								</div>
+							<div class='container-fluid col-sm-9 form-group'>
+								<div id="dBody<%= mail.subject %>" class="row" value='<%= mail.subject %>'><%= mail.subject %></div>
 							</div>
 						</div>
-		    	</div>
+		    		</div>
 					<br/>
 				<% end %>
 

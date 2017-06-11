@@ -22,10 +22,30 @@ function naoEstaEditando()
     return ($('.estaEditando')[0] === undefined);
 }
 
+function mostrarBody(id)
+{
+    var dBody = document.getElementById('dBody' + id);
+    var txt = document.getElementById('txt' + id);
+
+    if (dBody.innerHTML == id)
+        dBody.innerHTML = txt.value;
+    else
+        dBody.innerHTML = id;
+}
+
 function print()
 {
-    var arquivo = document.getElementById('arquivo');
-    alert(arquivo.value+"");
+    var paraQuem = document.getElementById('paraQuem');
+    var assunto = document.getElementById('assunto');
+    var texto = document.getElementById('Ftexto');
+    var arquivos = document.getElementById('arquivos');
+
+    paraQuem.value = "";
+    assunto.value = "";
+    texto.value = "";
+    arquivos.value = "";
+
+    alert("Envio realizado com sucesso");
 }
 
 function mudarNome()
