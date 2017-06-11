@@ -74,7 +74,7 @@ class EmailsController < ApplicationController
     assunto = email_param(:assunto)
     texto = email_param(:texto)
 
-    smtp = Imap.find_by(id: @email.imaps_id)
+    smtp = Smtp.find_by(id: @email.smtps_id)
 
     Mail.defaults do
       delivery_method :smtp, 

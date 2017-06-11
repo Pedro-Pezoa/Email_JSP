@@ -35,17 +35,7 @@ function mostrarBody(id)
 
 function print()
 {
-    var paraQuem = document.getElementById('paraQuem');
-    var assunto = document.getElementById('assunto');
-    var texto = document.getElementById('Ftexto');
-    var arquivos = document.getElementById('arquivos');
-
-    paraQuem.value = "";
-    assunto.value = "";
-    texto.value = "";
-    arquivos.value = "";
-
-    alert("Envio realizado com sucesso");
+		alert("Enviando agora mesmo!");
 }
 
 function mudarNome()
