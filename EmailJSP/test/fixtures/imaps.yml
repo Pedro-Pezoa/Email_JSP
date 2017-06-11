@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  endereco: imap.google.com
+  endereco: imap.gmail.com
   porta: 993
   enable_ssl: true
 

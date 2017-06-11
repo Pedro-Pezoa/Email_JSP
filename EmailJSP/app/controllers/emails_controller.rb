@@ -41,20 +41,23 @@ class EmailsController < ApplicationController
     if email_param(:prox)
       @comeco = email_param(:fim).to_i
       @fim = @comeco + 10
-    end 
-
-    else if email_param(:ant) && email_param(:comeco).to_i != 0
+      
+    end
+    
+    if email_param(:ant) && email_param(:comeco).to_i != 0
       @fim = email_param(:comeco).to_i
-      @comeco = @fim - 10
-    end 
+      @comeco = @fim - 10 
+    end
+
+    imap = Imap.find_by(id: @email.imaps_id)
 
     Mail.defaults do
       retriever_method :imap, 
-                       :address  => "imap.gmail.com",
-                       :port       => 993,
+                       :address  => imap.endereco,
+                       :port       => imap.porta,
                        :user_name  => nome,
                        :password   => senha,
-                       :enable_ssl => true
+                       :enable_ssl => imap.enable_ssl
     end
     @mails = []
     @mails = Mail.find(:what => :last, :count => @fim, :order => :desc)[@comeco..@fim]
@@ -71,14 +74,16 @@ class EmailsController < ApplicationController
     assunto = email_param(:assunto)
     texto = email_param(:texto)
 
+    smtp = Imap.find_by(id: @email.imaps_id)
+
     Mail.defaults do
       delivery_method :smtp, 
-                      :address              => "smtp.gmail.com",
-                      :port                 => 587,
+                      :address              => smtp.endereco,
+                      :port                 => smtp.porta,
                       :user_name            => nome,
                       :password             => senha,
-                      :authentication       => 'plain',
-                      :enable_starttls_auto => true
+                      :authentication       => smtp.autenticacao,
+                      :enable_starttls_auto => smtp.enable_starttls_auto
     end
 
     unless arquivo.empty?
@@ -110,7 +115,11 @@ class EmailsController < ApplicationController
   end
 
   def new
-    Email.create(email_params)
+    empsdk = email_params
+    protocols = identify_protocols(empsdk[:email])
+    empsdk[:smtps_id] = protocols[:smtp_id]
+    empsdk[:imaps_id] = protocols[:imap_id]
+    Email.create(empsdk)
     redirect_to "/emails/"
   end
 
@@ -152,4 +161,14 @@ class EmailsController < ApplicationController
     params[:email].permit(:email, :senha, :user_id)
   end
 
+  def identify_protocols(email)
+    domain = Mail::Address.new(email).domain
+    case domain
+    when "gmail.com"
+      imap = Imap.find_by(endereco: "imap.gmail.com")
+      smtp = Smtp.find_by(endereco: "smtp.gmail.com")
+    end
+    {:imap_id => imap.id,
+     :smtp_id => smtp.id}
+  end 
 end

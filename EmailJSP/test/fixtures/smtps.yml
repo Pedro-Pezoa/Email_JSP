@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  endereco: smtp.google.com
+  endereco: smtp.gmail.com
   porta: 587
   autenticacao: plain
   enable_starttls_auto: true
